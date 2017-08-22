@@ -17,7 +17,7 @@ class DmozSpide(scrapy.Spider):
     ]
 
     def __init__(self):
-        self.HOST_URL = "http://qq.yh31.com/"
+        self.HOST_URL = "http://qq.yh31.com"
 
     def parse(self, response):
         # self.idList = response.xpath("//div[@class='tb fix']/a[@rel='nofollow']/text()").extract()
