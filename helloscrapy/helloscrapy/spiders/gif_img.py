@@ -32,7 +32,7 @@ class DmozSpide(scrapy.Spider):
             for i in range(len(gifs)):
                 print("loading:" + str(gifs[i]))
                 helper = GifImageHelper()
-                helper.insertOneGif(self.HOST_URL + gifs[i], self.HOST_URL + titles[i])
+                helper.insertOneGif(self.HOST_URL + gifs[i], titles[i])
 
             next_url = response.xpath("//span[@id='pe100_page_infolist']/a[last()]/@href").extract_first()
             if next_url:
