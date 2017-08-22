@@ -36,7 +36,7 @@ class DmozSpide(scrapy.Spider):
 
             next_url = response.xpath("//span[@id='pe100_page_infolist']/a[last()]/@href").extract_first()
             if next_url:
-                yield scrapy.Request(self.HOST_URL + next_url, callback=self.parse)
+                yield scrapy.Request(self.HOST_URL + next_url, callback=self.parse, dont_filter=True)
 
 
 class DBHelper:
