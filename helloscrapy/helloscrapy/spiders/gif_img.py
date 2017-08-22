@@ -34,7 +34,7 @@ class DmozSpide(scrapy.Spider):
                 helper = GifImageHelper()
                 helper.insertOneGif(self.HOST_URL + gifs[i], self.HOST_URL + titles[i])
 
-            next_url = self.HOST_URL + response.xpath("//span[@id='pe100_page_infolist']/a[last()]/@href").extract_first()
+            next_url = response.xpath("//span[@id='pe100_page_infolist']/a[last()]/@href").extract_first()
             if next_url:
                 yield scrapy.Request(self.HOST_URL + next_url, callback=self.parse)
 
