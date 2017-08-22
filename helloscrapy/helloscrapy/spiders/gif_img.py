@@ -3,6 +3,7 @@ from helloscrapy.items import DmozItem
 import pymysql
 import pymysql.cursors
 from helloscrapy.Dao.GifImage import GifImageHelper
+import operator
 
 pymysql.install_as_MySQLdb()
 
@@ -35,7 +36,7 @@ class DmozSpide(scrapy.Spider):
                 helper.insertOneGif(self.HOST_URL + gifs[i], titles[i])
 
             next_url = response.xpath("//span[@id='pe100_page_infolist']/a[last()]/@href").extract_first()
-            if next_url and len(gifs) == 16:
+            if next_url and len(gifs) == 16 and not operator.eq(response.url, self.HOST_URL + next_url):
                 yield scrapy.Request(self.HOST_URL + next_url, callback=self.parse, dont_filter=True)
 
 
