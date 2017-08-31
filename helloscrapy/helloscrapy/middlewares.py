@@ -15,8 +15,8 @@ import base64
 proxyServer = "http://proxy.abuyun.com:9020"
 
 # 代理隧道验证信息
-proxyUser = "HYA6P94ZOD121P3D"
-proxyPass = "A92649068F0DE373"
+proxyUser = "H470812I8J92621D"
+proxyPass = "BF303B8C84F82579"
 
 # for Python3
 proxyAuth = "Basic " + base64.urlsafe_b64encode(bytes((proxyUser + ":" + proxyPass), "ascii")).decode("utf8")
@@ -35,8 +35,8 @@ class HelloscrapySpiderMiddleware(object):
         if ua:
             request.headers.setdefault('User-Agent', ua)
 
-        # request.meta["proxy"] = proxyServer
-        # request.headers["Proxy-Authorization"] = proxyAuth
+        request.meta["proxy"] = proxyServer
+        request.headers["Proxy-Authorization"] = proxyAuth
 
         return None
 
