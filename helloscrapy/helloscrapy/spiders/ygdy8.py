@@ -22,18 +22,17 @@ class DoubanSpider(scrapy.Spider):
 
     def parse(self, response):
         # 下一页
-        print("parse:" + response.url)
         next_url = response.xpath("//a[text()='下一页']/@href").extract_first()
 
         if next_url:
             next_url = response.url.rstrip(response.url.split('/')[-1]) + next_url
             yield scrapy.Request(next_url, callback=self.parse, dont_filter=True)
 
-        url = response.xpath("//b/a[last()]/@href").extract_first()
-        yield scrapy.Request(self._HOST + url, callback=self.parse_detail, dont_filter=True)
+        urls = response.xpath("//b/a[last()]/@href").extract()
+        for url in urls:
+            yield scrapy.Request(self._HOST + url, callback=self.parse_detail, dont_filter=True)
 
     def parse_detail(self, response):
-        print("parse detail:" + response.url)
         helper = DBHelper()
         urls = response.xpath("//a[contains(text(),'ftp')]/text()").extract()
         movie_name = response.xpath("//div[@class='bd3r']/div[@class='co_area2']/div[@class='title_all']/h1/font/text()").extract_first()
