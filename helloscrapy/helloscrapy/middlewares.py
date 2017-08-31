@@ -35,8 +35,8 @@ class HelloscrapySpiderMiddleware(object):
         if ua:
             request.headers.setdefault('User-Agent', ua)
 
-        request.meta["proxy"] = proxyServer
-        request.headers["Proxy-Authorization"] = proxyAuth
+        # request.meta["proxy"] = proxyServer
+        # request.headers["Proxy-Authorization"] = proxyAuth
 
         return None
 
