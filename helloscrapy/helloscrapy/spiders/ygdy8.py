@@ -23,7 +23,7 @@ class DoubanSpider(scrapy.Spider):
     def parse(self, response):
         # 下一页
         print("parse:" + response.url)
-        next_url = response.xpath("//a[text()='下一页']").extract_first()
+        next_url = response.xpath("//a[text()='下一页']/@href").extract_first()
 
         next_url = next_url + response.url.rstrip(response.url.split('/')[-1])
 
