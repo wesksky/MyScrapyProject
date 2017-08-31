@@ -25,15 +25,12 @@ class DoubanSpider(scrapy.Spider):
         print("parse:" + response.url)
         next_url = response.xpath("//a[text()='下一页']/@href").extract_first()
 
-        next_url = response.url.rstrip(response.url.split('/')[-1]) + next_url
-
         if next_url:
+            next_url = response.url.rstrip(response.url.split('/')[-1]) + next_url
             yield scrapy.Request(next_url, callback=self.parse, dont_filter=True)
 
-        urls = response.xpath("//b/a[last()]/@href").extract()
-        if urls:
-            for url in urls:
-                yield scrapy.Request(self._HOST + url, callback=self.parse_detail, dont_filter=True)
+        url = response.xpath("//b/a[last()]/@href").extract_first()
+        yield scrapy.Request(self._HOST + url, callback=self.parse_detail, dont_filter=True)
 
     def parse_detail(self, response):
         print("parse detail:" + response.url)
