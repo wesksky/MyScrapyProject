@@ -21,7 +21,7 @@ NEWSPIDER_MODULE = 'helloscrapy.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
-COOKIES_ENABLES = True
+COOKIES_ENABLES = False
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'
 
@@ -38,7 +38,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 # RANDOMIZE_DOWNLOAD_DELAY = True
-# DOWNLOAD_DELAY = 0.2
+DOWNLOAD_DELAY = 0.1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
