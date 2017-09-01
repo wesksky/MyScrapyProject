@@ -33,14 +33,14 @@ class DoubanSpider(scrapy.Spider):
             yield scrapy.Request(self._HOST + url, callback=self.parse_detail, dont_filter=True)
 
     def parse_detail(self, response):
-        helper = DBHelper()
-        urls = response.xpath("//a[contains(text(),'ftp')]/text()").extract()
+        urls = response.xpath("//tbody/tr/td/a/@href").extract()
         movie_name = response.xpath("//div[@class='bd3r']/div[@class='co_area2']/div[@class='title_all']/h1/font/text()").extract_first()
-        for url in urls:
-            helper.insertOneMovie(url, movie_name)
+        if urls:
+            for url in urls:
+                helper = DBHelper()
+                helper.insertOneMovie(url, movie_name)
 
 class DBHelper:
-
     def __init__(self):
         self.config = {
             'host' : '104.128.91.88',
