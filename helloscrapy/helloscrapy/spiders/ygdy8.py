@@ -3,6 +3,7 @@ import pymysql
 import pymysql.cursors
 import os
 import requests
+import urljoin from urlparse
 
 pymysql.install_as_MySQLdb()
 
@@ -25,8 +26,7 @@ class DoubanSpider(scrapy.Spider):
         next_url = response.xpath("//a[text()='下一页']/@href").extract_first()
 
         if next_url:
-            next_url = response.url.rstrip(response.url.split('/')[-1]) + next_url
-            yield scrapy.Request(next_url, callback=self.parse, dont_filter=True)
+            yield scrapy.Request(urljoin(response.url, next_url), callback=self.parse, dont_filter=True)
 
         urls = response.xpath("//b/a[last()]/@href").extract()
         for url in urls:
